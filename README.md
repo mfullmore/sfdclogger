@@ -1,14 +1,31 @@
-# Salesforce DX Project: Next Steps
+# SFDC Logger
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+The idea of logging is not new and custom logging in salesforce is not new. There are lots of custom logging solutions so here is mine. If you want full logging and observibility you should look at https://pharos.ai/ but if you need a quick and dirty custom logger use sfdc logger.
 
-## How Do You Plan to Deploy Your Changes?
+## Example
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+```
+LoggerHttp log = new LoggerHttp();
+Http h = new Http();
 
-## Configure Your Salesforce DX Project
+HttpRequest req = new HttpRequest();
+String reqBody = '{"data": "value"}';
+req.setBody(reqBody);
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+String endpoint = 'https://some-cool-url-web-service/awesome/resource';
+req.setEndpoint(endpoint);
+req.setMethod('POST');
+
+
+log.requestBody = reqBody;
+log.requestUrl = endpoint;
+
+HttpResponse res = h.send(req);
+log.responseBody = res.getBody();
+insert log.end();
+```
+
+## Managed Package
 
 ## Read All About It
 
