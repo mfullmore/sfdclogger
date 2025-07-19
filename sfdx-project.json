@@ -3,10 +3,22 @@
     {
       "path": "force-app",
       "default": true
+    },
+    {
+      "versionName": "ver 1.0",
+      "versionNumber": "1.0.0.NEXT",
+      "path": "./force-app",
+      "default": false,
+      "package": "sfdclogger",
+      "versionDescription": "Simple custom logger"
     }
   ],
   "name": "sfdclogger",
-  "namespace": "",
+  "namespace": "sfdxlogger",
   "sfdcLoginUrl": "https://login.salesforce.com",
-  "sourceApiVersion": "64.0"
+  "sourceApiVersion": "64.0",
+  "packageAliases": {
+    "sfdclogger": "0Hoak0000000jl7CAA",
+    "sfdclogger@1.0.0-2": "04tak0000009DqrAAE"
+  }
 }

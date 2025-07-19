@@ -27,6 +27,8 @@ insert log.end();
 
 ## Managed Package
 
+https://login.salesforce.com/packaging/installPackage.apexp?p0=04tak0000009DqrAAE
+
 ## Read All About It
 
 - [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)

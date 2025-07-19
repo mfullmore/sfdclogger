@@ -1,8 +1,8 @@
 /**
  * @description
  */
-public with sharing class LoggerBatch extends Logger {
-    public LoggerBatch() {
+global with sharing class LoggerBatch extends Logger {
+    global LoggerBatch() {
         super();
         this.type = Logger.Type.BATCH;
     }

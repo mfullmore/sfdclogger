@@ -1,8 +1,8 @@
 /**
  * @description
  */
-public with sharing class LoggerLwc extends Logger {
-    public LoggerLwc() {
+global with sharing class LoggerLwc extends Logger {
+    global LoggerLwc() {
         super();
         this.type = Logger.Type.LWC;
     }

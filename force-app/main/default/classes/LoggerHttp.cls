@@ -1,8 +1,8 @@
 /**
  * @description
  */
-public with sharing class LoggerHttp extends Logger {
-    public LoggerHttp() {
+global with sharing class LoggerHttp extends Logger {
+    global LoggerHttp() {
         super();
         this.type = Logger.Type.HTTP;
     }

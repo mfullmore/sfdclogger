@@ -1,52 +1,52 @@
 /**
  * logging class for logging TODO: update this 
  */
-public with sharing virtual class Logger {
+global with sharing virtual class Logger {
     
-    public String className { get; set; }
-    public String methodName { get; set; }
-    public String details { get; set; }
-    public Datetime endTime { get; set; }
-    public Logger.EventType eventType { get; set; }
-    public String lineNumber { get; set; }
-    public String requestBody { get; set; }
-    public String requestHeaders { get; set; }
-    public String requestUrl { get; set; }
-    public String responseBody { get; set; }
-    public String responseHeaders { get; set; }
-    public String responseUrl { get; set; }
-    public String stackTrace { get; set; }
-    public Datetime startTime { get; set; }
-    public Logger.Type type { get; set; }
+    global String className { get; set; }
+    global String methodName { get; set; }
+    global String details { get; set; }
+    global Datetime endTime { get; set; }
+    global Logger.EventType eventType { get; set; }
+    global String lineNumber { get; set; }
+    global String requestBody { get; set; }
+    global String requestHeaders { get; set; }
+    global String requestUrl { get; set; }
+    global String responseBody { get; set; }
+    global String responseHeaders { get; set; }
+    global String responseUrl { get; set; }
+    global String stackTrace { get; set; }
+    global Datetime startTime { get; set; }
+    global Logger.Type type { get; set; }
 
-    public enum EventType {
+    global enum EventType {
         ERROR,
         INFO,
         WARRING
     }
 
-    public enum Type {
+    global enum Type {
         APEX,
         BATCH,
         HTTP,
         LWC
     }
     
-    public Logger() {
+    global Logger() {
         this.details = '';
         this.startTime = System.now();
     }
 
-    public Log__c end() {
+    global Log__c end() {
         this.endTime = System.now();
         return this.saveLogger();
     }
 
-    public void writeToDetails(String pText, String pObject) {
+    global void writeToDetails(String pText, String pObject) {
         this.details += pText + '\n' + pObject + '\n\n';
     }
 
-    public Log__c saveLogger() {
+    global Log__c saveLogger() {
         Log__c log = new Log__c(
             Class_Name__c = this.className,
             Method_Name__c = this.methodName,
@@ -74,7 +74,7 @@ public with sharing virtual class Logger {
      * @return void
      */
     @future
-    public static void saveInTheFuture(String pJsonLog) {
+    global static void saveInTheFuture(String pJsonLog) {
         try {
             Logger log = (Logger)JSON.deserialize(pJsonLog, Logger.class);
             insert log.end();
