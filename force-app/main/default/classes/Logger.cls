@@ -62,7 +62,7 @@ public with sharing virtual class Logger {
             Response_Url__c = this.responseUrl,
             Stack_Trace__c = this.stackTrace,
             Start_Time__c = this.startTime,
-            Type__c = this.type.name()
+            Type__c = (this.type != null) ? this.type.name() : Logger.Type.APEX.name()
         );
 
         return log;
