@@ -48,24 +48,37 @@ global with sharing virtual class Logger {
 
     global Log__c saveLogger() {
         Log__c log = new Log__c(
-            Class_Name__c = this.className,
-            Method_Name__c = this.methodName,
-            Details__c = this.details,
+            Class_Name__c = Logger.truncateString(this.className, 255),
+            Method_Name__c = Logger.truncateString(this.methodName, 255),
+            Details__c = Logger.truncateString(this.details, 60000),
             End_Time__c = this.endTime,
             Event_Type__c = (this.eventType != null) ? this.eventType.name() : Logger.EventType.INFO.name(),
             Line_Number__c = lineNumber,
-            Request_Body__c = this.requestBody,
-            Request_Headers__c = this.requestHeaders,
-            Request_Url__c = this.requestUrl,
-            Response_Body__c = this.responseBody,
-            Response_Headers__c = this.responseHeaders,
-            Response_Url__c = this.responseUrl,
+            Request_Body__c = Logger.truncateString(this.requestBody, 30000),
+            Request_Headers__c = Logger.truncateString(this.requestHeaders, 5000),
+            Request_Url__c = Logger.truncateString(this.requestUrl, 2000),
+            Response_Body__c = Logger.truncateString(this.responseBody, 30000),
+            Response_Headers__c = Logger.truncateString(this.responseHeaders, 5000),
+            Response_Url__c = Logger.truncateString(this.responseUrl, 2000),
             Stack_Trace__c = this.stackTrace,
             Start_Time__c = this.startTime,
             Type__c = (this.type != null) ? this.type.name() : Logger.Type.APEX.name()
         );
 
         return log;
+    }
+
+    @TestVisible
+    private static String truncateString(String pString, Integer pMaxLength) {
+        if (pString == null) {
+            return null;
+        }
+
+        if (pString.length() > pMaxLength) {
+            return pString.substring(0, pMaxLength);
+        }
+
+        return pString;
     }
 
     /**

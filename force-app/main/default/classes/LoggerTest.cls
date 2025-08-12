@@ -91,4 +91,23 @@ private class LoggerTest {
         Log__c queriedLog = [select Id, Class_Name__c from Log__c limit 1];
         System.assert(queriedLog.Class_Name__c == 'At future', 'Failed to save from the future');
     }
+
+    @IsTest
+    static void testTruncateString() {
+        String s = 'abcdefghijklmnopqrstuvwxyz';
+        System.assert(s.length() == 26, 'Failure: test string is not 26 in lenght');
+
+        // test with max size of 20
+        System.assert(
+            Logger.truncateString(s, 20) == 'abcdefghijklmnopqrst',
+            'Failure: test truncate string did not work'
+        );
+
+        // test with a max size over stirng length
+        System.assert(Logger.truncateString(s, 30) == s, 'Failure: test with max size over');
+
+        // test if string is null
+        s = null;
+        System.assert(Logger.truncateString(s, 20) == null, 'Failure: test with null');
+    }
 }
